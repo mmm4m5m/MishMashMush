@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/share"
+        android:title="Share"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/share2"
+        android:icon="@drawable/share"
+        android:title="Share2"
+        android:visible="false" />
+    <item
+        android:id="@+id/gameQuestionsFragment"
+        android:title="@string/menu_game"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/aboutFragment"
+        android:title="@string/menu_about"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/test_old_divider"
+        android:title="--- test/old items below ---"
+        app:showAsAction="never"
+        android:visible="false" />
+    <item
+        android:id="@+id/action_game"
+        android:title="Game (activity)"
+        app:showAsAction="never"
+        android:visible="false" />
+    <item
+        android:id="@+id/action_about"
+        android:title="About (activity)"
+        app:showAsAction="never"
+        android:visible="false" />
+</menu>

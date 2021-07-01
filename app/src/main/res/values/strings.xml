@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Mish-Mash Mush</string>
+    <string name="image_fab">Email</string>
+
+    <string name="menu_game">Game</string>
+    <string name="menu_about">About</string>
+
+    <string name="edit_guest_what_is_your_name">What is your name?</string>
+    <string name="button_guest_done">Done</string>
+
+    <string name="image_dice">Dice</string>
+    <string name="button_dice_roll">Roll</string>
+    <string name="button_dice_count_up">Count Up</string>
+    <string name="button_dice_clear">Clear</string>
+    <string name="dice_rolling">rolling...</string>
+    <string name="dice_counting">counting...</string>
+    <string name="dice_roll">Roll The Dices!</string>
+    <string name="dice_format">" x "</string>
+
+    <string name="text_about_name">mmm4m5m</string>
+    <string name="image_about_road_sign_no_entry">Road sign - No entry</string>
+    <string name="image_about_android_bug">Android bug</string>
+    <string name="text_about_bio">A secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
+        \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
+        \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
+        \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
+        \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
+        \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!</string>
+
+    <string name="title_game_questions">Question %1$d of %2$d</string>
+</resources>
