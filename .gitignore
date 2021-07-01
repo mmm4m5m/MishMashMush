@@ -1,15 +1,28 @@
+### android studio
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
+/.gradle/
 /.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+/.idea/libraries/
+/.idea/modules.xml
+/.idea/navEditor.xml
+/.idea/workspace.xml
+/local.properties
+
+
+### android studio
+#/.idea/caches
+#.DS_Store
+#/build
+#/captures
+#.externalNativeBuild
+#.cxx
+#local.properties
+
+
+### other files
+#??? todo - ignore or not
+app/.gitignore
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
