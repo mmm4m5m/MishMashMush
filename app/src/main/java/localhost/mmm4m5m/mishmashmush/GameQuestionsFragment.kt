@@ -8,22 +8,9 @@ import androidx.navigation.findNavController
 import localhost.mmm4m5m.mishmashmush.databinding.FragmentGameQuestionsBinding
 import kotlin.math.min
 
-//// TODO: Rename parameter arguments, choose names that match
-//// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//private const val ARG_PARAM1 = "param1"
-//private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [GameQuestionsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GameQuestionsFragment : Fragment() {
-//    // TODO: Rename and change types of parameters
-//    private var param1: String? = null
-//    private var param2: String? = null
-
     data class Question(val text: String, val answers: List<String>)
+
     // The first answer is the correct one. All questions must have four answers.
     private val questions: MutableList<Question> = mutableListOf(
         Question(text = "What is Android Jetpack?",
@@ -49,94 +36,67 @@ class GameQuestionsFragment : Fragment() {
     )
 
     private lateinit var binding: FragmentGameQuestionsBinding
-    private lateinit var answers: MutableList<String>
-    private var questionsIndex = 0
+    lateinit var question: Question
+    lateinit var answers: MutableList<String>
+    private var questionsIndex = -1
     private val questionsCount = min((questions.size + 1) / 2, 3)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         //return inflater.inflate(R.layout.fragment_game, container, false)
         setHasOptionsMenu(true)
-        binding = FragmentGameQuestionsBinding.inflate(layoutInflater)
+        binding = FragmentGameQuestionsBinding.inflate(inflater, container, false)
+        //??? todo state after back
 
         questions.shuffle()
         setQuestion()
+        binding.game = this
 
-        //??? binding.game = this
-
-        binding.submitButton.setOnClickListener(::onClickSubmitButton)
+        binding.gameSubmitButton.setOnClickListener(::onClickSubmitButton)
         return binding.root
     }
 
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment GameFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            GameQuestionsFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+        if (menu.size() == 0) return // GameActivity do not have menu
         //inflater.inflate(R.menu.menu_main, menu)
-        menu.findItem(R.id.gameQuestionsFragment).isVisible = false
+        menu.findItem(R.id.gameQuestionsMenu).isVisible = false
     }
 
     private fun setQuestion() {
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_game_questions, questionsIndex + 1, questionsCount)
-        binding.questionText.text = questions[questionsIndex].text
+        questionsIndex++
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.gameQuestionTitle, questionsIndex + 1, questionsCount)
+        question = questions[questionsIndex]
         answers = questions[questionsIndex].answers.toMutableList()
-        if (!PROJECT_TEST_GAME) {
+        if (PROJECT_TEST_GAME) {
+            binding.answer1RadioButtonGame.isChecked = true
+        } else {
             answers.shuffle()
-            binding.firstAnswerRadioButton .isChecked = false
         }
-        binding.firstAnswerRadioButton .text = answers[0]
-        binding.secondAnswerRadioButton.text = answers[1]
-        binding.thirdAnswerRadioButton .text = answers[2]
-        binding.fourthAnswerRadioButton.text = answers[3]
     }
 
     private fun onClickSubmitButton(view: View) {
-        val answerIndex = when (binding.questionRadioGroup.checkedRadioButtonId) {
-            R.id.firstAnswerRadioButton  -> 0
-            R.id.secondAnswerRadioButton -> 1
-            R.id.thirdAnswerRadioButton  -> 2
-            R.id.fourthAnswerRadioButton -> 3
+        val answerIndex = when (binding.answersRadioGroup.checkedRadioButtonId) { //??? todo two-way data binding
+            R.id.answer1RadioButtonGame -> 0
+            R.id.answer2RadioButtonGame -> 1
+            R.id.answer3RadioButtonGame -> 2
+            R.id.answer4RadioButtonGame -> 3
             else -> return
         }
         if (answers[answerIndex] != questions[questionsIndex].answers[0]) {
             // The first answer is the correct one.
-            //view.findNavController().navigate(R.id.action_gameQuestionsFragment_to_gameTitleFragment_End)
-            view.findNavController().navigate(GameQuestionsFragmentDirections.actionGameQuestionsFragmentToGameTitleFragmentEnd(questionsCount, questionsIndex+1))
+            //view.findNavController().navigate(R.id.actionEnd_gameQuestions_to_gameTitle)
+            view.findNavController().navigate(GameQuestionsFragmentDirections.actionEndGameQuestionsToGameTitle(questionsCount, questionsIndex))
         } else if (questionsIndex >= questionsCount-1) {
-            //view.findNavController().navigate(R.id.action_gameQuestionsFragment_to_gameTitleFragment_Won)
-            view.findNavController().navigate(GameQuestionsFragmentDirections.actionGameQuestionsFragmentToGameTitleFragmentWon(questionsCount, questionsIndex+1))
+            //view.findNavController().navigate(R.id.actionWin_gameQuestions_to_gameTitle)
+            view.findNavController().navigate(GameQuestionsFragmentDirections.actionWinGameQuestionsToGameTitle(questionsCount, questionsIndex+1))
         } else {
-            questionsIndex++
             setQuestion()
-            //??? binding.invalidateAll()
+            binding.invalidateAll()
         }
     }
 }

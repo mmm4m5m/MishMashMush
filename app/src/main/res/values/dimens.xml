@@ -12,7 +12,6 @@
     <dimen name="image_header_height">192dp</dimen>
     <dimen name="horizontal_margin">8dp</dimen>
     <dimen name="button_text_size">18sp</dimen>
-    <string name="submit_button">Submit</string>
     <dimen name="question_text_size">30sp</dimen>
     <dimen name="button_padding">16dp</dimen>
 </resources>

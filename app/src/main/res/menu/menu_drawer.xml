@@ -4,26 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/gameQuestionsFragment"
-        android:title="@string/menu_game"
+        android:id="@+id/gameQuestionsDrawer"
+        android:icon="@drawable/android_category_simple"
+        android:title="@string/id_gameQuestionsDrawer"
         app:showAsAction="never" />
     <item
-        android:id="@+id/aboutFragment"
-        android:title="@string/menu_about"
+        android:id="@+id/aboutDrawer"
+        android:icon="@drawable/ic_baseline_adb_24"
+        android:title="@string/id_aboutDrawer"
         app:showAsAction="never" />
     <item
-        android:id="@+id/test_old_divider"
-        android:title="--- test/old items below ---"
-        app:showAsAction="never"
-        android:visible="false" />
+        android:id="@+id/testOldDividerDrawer"
+        android:title="@string/id_testOldDividerDrawer"
+        android:visible="false"
+        app:showAsAction="never" />
     <item
-        android:id="@+id/action_game"
-        android:title="Game (activity)"
-        app:showAsAction="never"
-        android:visible="false" />
+        android:id="@+id/gameActivityDrawer"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="@string/id_gameActivityDrawer"
+        android:visible="false"
+        app:showAsAction="never" />
     <item
-        android:id="@+id/action_about"
-        android:title="About (activity)"
-        app:showAsAction="never"
-        android:visible="false" />
+        android:id="@+id/aboutActivityDrawer"
+        android:icon="@android:drawable/presence_busy"
+        android:title="@string/id_aboutActivityDrawer"
+        android:visible="false"
+        app:showAsAction="never" />
 </menu>

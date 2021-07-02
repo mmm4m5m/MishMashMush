@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AboutFragment">
+    tools:context=".AboutFragment"
+    tools:viewBindingIgnore="true">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/layout_margin"
         android:fontFamily="@font/roboto"
-        android:text="@string/text_about_name"
+        android:text="@string/aboutNameText"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_size" />
@@ -20,11 +21,16 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="128dp"
-        android:contentDescription="@string/image_about_android_bug"
+        android:contentDescription="@string/aboutAndroidImage"
         app:srcCompat="@drawable/ic_baseline_adb_24" />
-    <!--
-            android:contentDescription="@string/road_sign_no_entry"
-            app:srcCompat="@android:drawable/presence_busy" /> -->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:contentDescription="@string/aboutNoEntryImage"
+        android:visibility="gone"
+        app:srcCompat="@android:drawable/presence_busy"
+        tools:visibility="visible" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -45,10 +51,10 @@
                 android:layout_marginBottom="@dimen/layout_margin"
                 android:fontFamily="@font/roboto"
                 android:lineSpacingMultiplier="1.2"
-                android:text="@string/text_about_bio"
+                android:text="@string/aboutBioText"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_size"
-                tools:text="Line\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine" />
+                tools:text="Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6\nLine 7\nLine 8\nLine 9\nLine 0\nLine 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

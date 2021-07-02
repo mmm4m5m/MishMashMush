@@ -6,7 +6,6 @@ import android.util.TypedValue
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 
-
 class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,10 +13,11 @@ class AboutActivity : AppCompatActivity() {
 
         //supportActionBar?.hide()
         val color = TypedValue()
-        getTheme().resolveAttribute (R.attr.colorPrimaryVariant, color, true);
+        theme.resolveAttribute(R.attr.colorPrimaryVariant, color, true)
         supportActionBar?.setBackgroundDrawable(ColorDrawable(color.data))
 
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_adb_24);
+        //supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_adb_24)
+        supportActionBar?.setHomeAsUpIndicator(android.R.drawable.presence_busy)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

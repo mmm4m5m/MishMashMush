@@ -19,18 +19,16 @@ class AboutFragment : Fragment() {
 //    private var param1: String? = null
 //    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//??? todo research fragment arguments
 //        arguments?.let {
 //            param1 = it.getString(ARG_PARAM1)
 //            param2 = it.getString(ARG_PARAM2)
 //        }
-    }
+//    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //(activity as AppCompatActivity).supportActionBar?.hide()
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_about, container, false)

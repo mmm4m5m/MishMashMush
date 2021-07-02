@@ -1,31 +1,94 @@
 <resources>
     <string name="app_name">Mish-Mash Mush</string>
-    <string name="image_fab">Email</string>
 
-    <string name="menu_game">Game</string>
-    <string name="menu_about">About</string>
+    <!-- ??? todo dummy values: <string name="id_...">-</string> -->
 
-    <string name="edit_guest_what_is_your_name">What is your name?</string>
-    <string name="button_guest_done">Done</string>
+    <!-- activity_main.xml -->
+    <string name="id_toolbar">-</string>
+    <string name="id_drawerLayout">-</string>
+    <string name="id_navHostFragmentMain">-</string>
+    <string name="id_navigationView">-</string>
+    <string name="id_floatingActionButton">Email</string>
 
-    <string name="image_dice">Dice</string>
-    <string name="button_dice_roll">Roll</string>
-    <string name="button_dice_count_up">Count Up</string>
-    <string name="button_dice_clear">Clear</string>
-    <string name="dice_rolling">rolling...</string>
-    <string name="dice_counting">counting...</string>
-    <string name="dice_roll">Roll The Dices!</string>
-    <string name="dice_format">" x "</string>
+    <!-- nav_header.xml -->
 
-    <string name="text_about_name">mmm4m5m</string>
-    <string name="image_about_road_sign_no_entry">Road sign - No entry</string>
-    <string name="image_about_android_bug">Android bug</string>
-    <string name="text_about_bio">A secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
+    <!-- nav_graph.xml -->
+    <string name="id_navigation">-</string>
+    <string name="id_diceFragmentNav">-</string>
+    <string name="id_aboutFragmentNav">-</string>
+    <string name="id_gameTitleFragmentNav">-</string>
+    <string name="id_action_gameTitle_to_gameQuestions">-</string>
+    <string name="id_gameQuestionsFragmentNav">-</string>
+    <string name="id_actionWin_gameQuestions_to_gameTitle">-</string>
+    <string name="id_actionEnd_gameQuestions_to_gameTitle">-</string>
+
+    <!-- menu_main.xml -->
+    <string name="id_shareActionMenu">Share</string>
+    <string name="id_shareMenu">Share</string>
+    <string name="id_gameQuestionsMenu">Game</string>
+    <string name="id_aboutMenu">About</string>
+    <string name="id_testOldDividerMenu">--- test/old items below ---</string>
+    <string name="id_gameActivityMenu">Game (activity)</string>
+    <string name="id_aboutActivityMenu">About (activity)</string>
+
+    <!-- menu_drawer.xml -->
+    <string name="id_gameQuestionsDrawer">Game</string>
+    <string name="id_aboutDrawer">About</string>
+    <string name="id_testOldDividerDrawer">--- test/old items below ---</string>
+    <string name="id_gameActivityDrawer">Game (activity)</string>
+    <string name="id_aboutActivityDrawer">About (activity)</string>
+
+    <!-- fragment_dice.xml -->
+    <string name="id_guestView">-</string>
+    <string name="id_guestEdit">What is your name?</string>
+    <string name="id_guestButton">Done</string>
+    <string name="id_guestText">-</string>
+    <string name="id_diceView">-</string>
+    <string name="id_diceText">Roll The Dices!</string>
+    <string name="id_dice1Image">Dice</string>
+    <string name="id_dice2Image">Dice</string>
+    <string name="id_diceRollButton">Roll</string>
+    <string name="id_diceCountButton">Cheat</string>
+    <string name="id_diceClearButton">Clear</string>
+    <string name="id_diceWonButton">You WON a Game!</string>
+    <string name="diceRolling">rolling...</string>
+    <string name="diceCounting">cheating...</string>
+    <string name="diceFormat">"%1$d x %2$d"</string>
+
+    <!-- fragment_about.xml -->
+    <!-- activity_about.xml -->
+    <string name="aboutNameText">mmm4m5m</string>
+    <string name="aboutAndroidImage">Android bug</string>
+    <string name="aboutNoEntryImage">Road sign - No entry</string>
+    <string name="aboutBioText">A secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
         \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
         \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
         \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
         \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
         \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!</string>
 
-    <string name="title_game_questions">Question %1$d of %2$d</string>
+    <!-- activity_game.xml -->
+    <string name="id_navHostFragmentGame">-</string>
+
+    <!-- fragment_game_title.xml -->
+    <string name="id_gameStartImage">-</string>
+    <string name="id_gameWinImage">Android mascot celebrating</string>
+    <string name="id_gamePlayButton">Play</string>
+    <string name="gameQuestionImage">Android mascot wondering</string>
+    <string name="gameWinShare">"I won with %1$d/%2$d correct answers!"</string>
+    <string name="errStartActivity">"Error: Application not found. (%1$s / %2$s)"</string>
+
+    <!-- fragment_game_questions.xml -->
+    <string name="id_gameQuestionImage">-</string>
+    <string name="id_gameQuestionText">id_questionText</string>
+    <string name="id_gameAnswersRadioGroup">-</string>
+    <string name="id_gameAnswer1RadioButtonGame">-</string>
+    <string name="id_gameAnswer2RadioButtonGame">-</string>
+    <string name="id_gameAnswer3RadioButtonGame">-</string>
+    <string name="id_gameAnswer4RadioButtonGame">-</string>
+    <string name="id_gameSubmitButton">Submit</string>
+    <string name="gameQuestionTitle">Question %1$d of %2$d</string>
+
+    <!-- - -->
+    <!-- ! -->
 </resources>

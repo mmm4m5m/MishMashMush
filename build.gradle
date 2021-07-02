@@ -24,7 +24,7 @@ allprojects {
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
     }
-//??? todo research (safeargs)
+//??? todo research - warnings with safeargs
 //    tasks.withType(JavaCompile) {
 //        options.compilerArgs << "-Xlint:unchecked"
 //    }

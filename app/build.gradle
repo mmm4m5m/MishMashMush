@@ -33,6 +33,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 apply plugin: 'androidx.navigation.safeargs'
@@ -53,7 +54,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
 
-//??? todo research
+//??? todo research gradle tasks
 preBuild.doLast {
     println "preBuild test"
 //    commandLine 'which', 'adb'
