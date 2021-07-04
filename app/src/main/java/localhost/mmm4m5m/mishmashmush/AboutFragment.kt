@@ -2,9 +2,9 @@ package localhost.mmm4m5m.mishmashmush
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
+//import androidx.fragment.app.Fragment // custom Overrides
 
-//// TODO: Rename parameter arguments, choose names that match
+//// todo: Rename parameter arguments, choose names that match
 //// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //private const val ARG_PARAM1 = "param1"
 //private const val ARG_PARAM2 = "param2"
@@ -15,13 +15,13 @@ import androidx.fragment.app.Fragment
  * create an instance of this fragment.
  */
 class AboutFragment : Fragment() {
-//    // TODO: Rename and change types of parameters
+//    // todo: Rename and change types of parameters
 //    private var param1: String? = null
 //    private var param2: String? = null
 
+//??? todo remove Old - research fragment arguments without Navigation controller
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
-//??? todo research fragment arguments
 //        arguments?.let {
 //            param1 = it.getString(ARG_PARAM1)
 //            param2 = it.getString(ARG_PARAM2)
@@ -29,6 +29,7 @@ class AboutFragment : Fragment() {
 //    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         //(activity as AppCompatActivity).supportActionBar?.hide()
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_about, container, false)
@@ -43,7 +44,7 @@ class AboutFragment : Fragment() {
 //         * @param param2 Parameter 2.
 //         * @return A new instance of fragment AboutFragment.
 //         */
-//        // TODO: Rename and change types and number of parameters
+//        // todo: Rename and change types and number of parameters
 //        @JvmStatic
 //        fun newInstance(param1: String, param2: String) =
 //            AboutFragment().apply {

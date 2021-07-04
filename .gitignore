@@ -19,8 +19,7 @@
 #local.properties
 
 
-### other files
-#??? todo - ignore or not
+### other files #??? todo - ignore?
 app/.gitignore
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties

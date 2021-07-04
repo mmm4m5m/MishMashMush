@@ -4,17 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
 import localhost.mmm4m5m.mishmashmush.databinding.ActivityMainBinding
+//import androidx.appcompat.app.AppCompatActivity // custom Overrides
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private lateinit var mmmLifecycle: MMMLifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,45 +33,41 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.navigationView, navController)
 
-        binding.navigationView.menu.findItem(R.id.testOldDividerDrawer).isVisible = PROJECT_TEST
-        binding.navigationView.menu.findItem(R.id.gameActivityDrawer)  .isVisible = PROJECT_TEST
-        binding.navigationView.menu.findItem(R.id.aboutActivityDrawer) .isVisible = PROJECT_TEST
+        mmmLifecycle = MMMLifecycle(this.lifecycle)
+
+        binding.navigationView.menu.findItem(R.id.testOldDividerDrawer).isVisible = PRJTST?.TEST_Old ?: false
+        binding.navigationView.menu.findItem(R.id.aboutActivityDrawer) .isVisible = PRJTST?.TEST_Old ?: false
         //binding.navigationView.setNavigationItemSelectedListener(::onNavigationItemSelectedListener) // used by NavController
         binding.navigationView.menu.findItem(R.id.aboutDrawer)        .setOnMenuItemClickListener(::onMenuItemClickListener)
         binding.navigationView.menu.findItem(R.id.gameQuestionsDrawer).setOnMenuItemClickListener(::onMenuItemClickListener)
-        binding.navigationView.menu.findItem(R.id.gameActivityDrawer) .setOnMenuItemClickListener(::onMenuItemClickListener)
         binding.navigationView.menu.findItem(R.id.aboutActivityDrawer).setOnMenuItemClickListener(::onMenuItemClickListener)
 
-        //??? todo use fab
+        //??? todo ideas for this floatingActionButton
         binding.floatingActionButton.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG) //???
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
 
-        //??? todo show about for first time
-        if (PROJECT_TEST_ABOUT_ACTIVITY) {
+        //??? todo idea - show About on first start
+        if (PRJTST?.TEST_Old ?: false) {
             //setContentView(R.layout.activity_about)
             startActivity(Intent(this, AboutActivity::class.java))
-        } else if (PROJECT_TEST_GAME_ACTIVITY) {
-            startActivity(Intent(this, GameActivity::class.java))
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
-        menu.findItem(R.id.testOldDividerMenu).isVisible = PROJECT_TEST
-        menu.findItem(R.id.gameActivityMenu)  .isVisible = PROJECT_TEST
-        menu.findItem(R.id.aboutActivityMenu) .isVisible = PROJECT_TEST
+        menu.findItem(R.id.testOldDividerMenu).isVisible = PRJTST?.TEST_Old ?: false
+        menu.findItem(R.id.aboutActivityMenu) .isVisible = PRJTST?.TEST_Old ?: false
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        //PROJECT_TEST_TOAST(this, navController.currentBackStackEntry?.destination.toString())
+        //PRJTST?.Toast(this, navController.currentBackStackEntry?.destination.toString())
         when {
             item.itemId == R.id.aboutMenu         -> navController.navigate(R.id.aboutFragmentNav)
             //NavigationUI.onNavDestinationSelected(item, navController) -> {}
             item.itemId == R.id.gameQuestionsMenu -> navController.navigate(R.id.gameTitleFragmentNav)
-            item.itemId == R.id.gameActivityMenu  -> startActivity(Intent(this, GameActivity::class.java))
             item.itemId == R.id.aboutActivityMenu -> startActivity(Intent(this, AboutActivity::class.java))
             else -> return super.onOptionsItemSelected(item)
         }
@@ -82,7 +80,6 @@ class MainActivity : AppCompatActivity() {
 //            item.itemId == R.id.aboutDrawer         -> navController.navigate(R.id.aboutFragmentNav)
 //            //NavigationUI.onNavDestinationSelected(item, navController) -> {} // like NavController
 //            item.itemId == R.id.gameQuestionsDrawer -> navController.navigate(R.id.gameTitleFragmentNav)
-//            item.itemId == R.id.gameActivityDrawer  -> startActivity(Intent(this, GameActivity::class.java))
 //            item.itemId == R.id.aboutActivityDrawer -> startActivity(Intent(this, AboutActivity::class.java))
 //            else -> return false
 //        }
@@ -94,7 +91,6 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.aboutDrawer         -> navController.navigate(R.id.aboutFragmentNav)
             R.id.gameQuestionsDrawer -> navController.navigate(R.id.gameTitleFragmentNav)
-            R.id.gameActivityDrawer  -> startActivity(Intent(this, GameActivity::class.java))
             R.id.aboutActivityDrawer -> startActivity(Intent(this, AboutActivity::class.java))
             else -> return false
         }
@@ -108,20 +104,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onDestinationChangedListener(controller: NavController, destination: NavDestination, arguments: Bundle?) {
-        //PROJECT_TEST_TOAST(this, destination.id)
+        //PRJTST?.Toast(this, destination.id)
+        binding.floatingActionButton.isVisible = destination.id == R.id.diceFragmentNav
         when (destination.id) {
-            R.id.diceFragmentNav -> binding.floatingActionButton.show()
-            else -> binding.floatingActionButton.hide()
+            R.id.diceFragmentNav -> supportActionBar?.show()
+            else                 -> supportActionBar?.hide()
         }
     }
 
     override fun onResume() {
-        super.onResume() //??? todo test pause/resume
+        super.onResume() //??? todo test resume/pause
         navController.addOnDestinationChangedListener(::onDestinationChangedListener)
     }
 
     override fun onPause() {
         navController.removeOnDestinationChangedListener(::onDestinationChangedListener)
-        super.onPause() //??? todo test pause/resume
+        super.onPause() //??? todo test resume/pause
     }
 }

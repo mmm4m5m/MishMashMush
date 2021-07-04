@@ -24,15 +24,11 @@
         android:icon="@drawable/ic_baseline_adb_24"
         android:title="@string/id_aboutMenu"
         app:showAsAction="never" />
+
+    <!-- ??? todo remove Old -->
     <item
         android:id="@+id/testOldDividerMenu"
         android:title="@string/id_testOldDividerMenu"
-        android:visible="false"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/gameActivityMenu"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="@string/id_gameActivityMenu"
         android:visible="false"
         app:showAsAction="never" />
     <item

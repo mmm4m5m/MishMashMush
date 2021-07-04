@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mish-Mash Mush</string>
 
-    <!-- ??? todo dummy values: <string name="id_...">-</string> -->
+    <!-- ??? todo dummy values? <string name="id_...">-</string> -->
 
     <!-- activity_main.xml -->
     <string name="id_toolbar">-</string>
@@ -28,14 +28,12 @@
     <string name="id_gameQuestionsMenu">Game</string>
     <string name="id_aboutMenu">About</string>
     <string name="id_testOldDividerMenu">--- test/old items below ---</string>
-    <string name="id_gameActivityMenu">Game (activity)</string>
     <string name="id_aboutActivityMenu">About (activity)</string>
 
     <!-- menu_drawer.xml -->
     <string name="id_gameQuestionsDrawer">Game</string>
     <string name="id_aboutDrawer">About</string>
     <string name="id_testOldDividerDrawer">--- test/old items below ---</string>
-    <string name="id_gameActivityDrawer">Game (activity)</string>
     <string name="id_aboutActivityDrawer">About (activity)</string>
 
     <!-- fragment_dice.xml -->
@@ -67,16 +65,13 @@
         \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!
         \n\nA secret\n\t\t\t<b>Android</b>\n\t\t\t\t\t\tadmirer!</string>
 
-    <!-- activity_game.xml -->
-    <string name="id_navHostFragmentGame">-</string>
-
     <!-- fragment_game_title.xml -->
     <string name="id_gameStartImage">-</string>
     <string name="id_gameWinImage">Android mascot celebrating</string>
     <string name="id_gamePlayButton">Play</string>
     <string name="gameQuestionImage">Android mascot wondering</string>
     <string name="gameWinShare">"I won with %1$d/%2$d correct answers!"</string>
-    <string name="errStartActivity">"Error: Application not found. (%1$s / %2$s)"</string>
+    <string name="errStartActivity">"Error: Application not found. (%1$s)"</string>
 
     <!-- fragment_game_questions.xml -->
     <string name="id_gameQuestionImage">-</string>

@@ -13,15 +13,11 @@
         android:icon="@drawable/ic_baseline_adb_24"
         android:title="@string/id_aboutDrawer"
         app:showAsAction="never" />
+
+    <!-- ??? todo remove Old -->
     <item
         android:id="@+id/testOldDividerDrawer"
         android:title="@string/id_testOldDividerDrawer"
-        android:visible="false"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/gameActivityDrawer"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="@string/id_gameActivityDrawer"
         android:visible="false"
         app:showAsAction="never" />
     <item
