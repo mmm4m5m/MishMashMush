@@ -1,4 +1,4 @@
-package localhost.mmm4m5m.mishmashmush
+package com.mmm4m5m.mishmashmush
 
 import android.os.Handler
 import android.os.Looper
@@ -32,7 +32,7 @@ class MMMLifecycle(lifecycle: Lifecycle) : LifecycleObserver {
     fun onRunTimer() {
         try {
             timerSeconds += WORK_INTERVAL_SECS
-            PRJTST?.Log({this}, "Working... $timerSeconds seconds")
+            //PRJTST?.Log({this}, "Working... $timerSeconds seconds") //??? todo pending
         } finally {
             handler.postDelayed(runnable, WORK_INTERVAL_SECS*1000)
         }

@@ -1,10 +1,10 @@
-package localhost.mmm4m5m.mishmashmush
+package com.mmm4m5m.mishmashmush
 
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import localhost.mmm4m5m.mishmashmush.databinding.FragmentGameQuestionsBinding
+import com.mmm4m5m.mishmashmush.databinding.FragmentGameQuestionsBinding
 import kotlin.math.min
 //import androidx.fragment.app.Fragment // custom Overrides
 
@@ -87,12 +87,12 @@ class GameQuestionsFragment : Fragment() {
         if (answers[answerIndex] != questions[questionsIndex].answers[0]) {
             // The first answer is the correct one.
             //view.findNavController().navigate(R.id.actionEnd_gameQuestions_to_gameTitle, bundle)
-            binding.root.findNavController().navigate(GameQuestionsFragmentDirections
-                .actionEndGameQuestionsToGameTitle(questionsCount, questionsIndex))
+            binding.root.findNavController().navigate(GameQuestionsFragmentDirections.
+                actionEndGameQuestionsToGameTitle(questionsCount, questionsIndex))
         } else if (questionsIndex >= questionsCount-1) {
             //view.findNavController().navigate(R.id.actionWin_gameQuestions_to_gameTitle, bundle)
-            binding.root.findNavController().navigate(GameQuestionsFragmentDirections
-                .actionWinGameQuestionsToGameTitle(questionsCount, questionsIndex+1))
+            binding.root.findNavController().navigate(GameQuestionsFragmentDirections.
+                actionWinGameQuestionsToGameTitle(questionsCount, questionsIndex + 1))
         } else {
             questionsIndex++
             setQuestion()

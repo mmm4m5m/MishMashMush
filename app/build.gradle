@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "localhost.mmm4m5m.mushmashmush"
+        applicationId "com.mmm4m5m.mishmashmush"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -50,6 +50,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

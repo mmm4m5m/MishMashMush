@@ -1,4 +1,4 @@
-package localhost.mmm4m5m.mishmashmush
+package com.mmm4m5m.mishmashmush
 
 /** CONFIG - DEFAULT
 Null helper, ProjectTest is not used at all (with minimal artifacts in the code)
@@ -9,6 +9,6 @@ Without Overrides (dummy middle class)
 
 /** TODO enable DEFAULT !!! */
 
-val PRJTST: localhost.mmm4m5m.mishmashmush.ProjectTest? = null
+val PRJTST: ProjectTest? = null
 open class AppCompatActivity : androidx.appcompat.app.AppCompatActivity() {}
 open class Fragment : androidx.fragment.app.Fragment() {}

@@ -1,4 +1,4 @@
-package localhost.mmm4m5m.mishmashmush
+package com.mmm4m5m.mishmashmush
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
-import localhost.mmm4m5m.mishmashmush.databinding.FragmentGameTitleBinding
+import com.mmm4m5m.mishmashmush.databinding.FragmentGameTitleBinding
 //import androidx.fragment.app.Fragment // custom Overrides
 
 class GameTitleFragment : Fragment() {
