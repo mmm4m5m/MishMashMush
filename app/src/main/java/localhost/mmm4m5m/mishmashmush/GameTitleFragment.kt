@@ -21,8 +21,7 @@ class GameTitleFragment : Fragment() {
         setHasOptionsMenu(true)
         val binding = FragmentGameTitleBinding.inflate(inflater, container, false)
 
-        binding.gameWinImage  .isVisible =  isWin()
-        binding.gameStartImage.isVisible = !isWin()
+        updateLayout(binding)
 
         binding.gamePlayButton.setOnClickListener(::onClickButton)
         return binding.root
@@ -49,21 +48,29 @@ class GameTitleFragment : Fragment() {
 
     private fun isWin(): Boolean {
         if (args == null) args = arguments?.let {
-            GameTitleFragmentArgs.fromBundle(it)
+            if (it.isEmpty) null else GameTitleFragmentArgs.fromBundle(it)
         }
         return args != null && args?.questionsCount == args?.questionsIndex
+    }
+
+    private fun updateLayout(binding: FragmentGameTitleBinding) {
+        binding.gameWinImage  .isVisible =  isWin()
+        binding.gameStartImage.isVisible = !isWin()
+        binding.gamePlayButton.text =
+            if (isWin()) getString(R.string.gamePlayAgain)
+            else getString(R.string.id_gamePlayButton)
     }
 
     private fun startActionSend() {
         val action = if (PRJTST?.TEST_Intent == true) Intent.ACTION_PICK else Intent.ACTION_SEND
         val intent = Intent(action)
-        intent.setType(MIMETYPE_TEXT_PLAIN).putExtra(Intent.EXTRA_TEXT,
-            getString(R.string.gameWinShare, args?.questionsCount, args?.questionsIndex))
+        intent.setType(MIMETYPE_TEXT_PLAIN).putExtra(Intent.EXTRA_TEXT
+            ,getString(R.string.gameWinShare, args?.questionsCount, args?.questionsIndex))
         try {
             startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             Toast.makeText(context, getString(R.string.errStartActivity, Intent.ACTION_SEND)
-                , Toast.LENGTH_SHORT).show()
+                ,Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -11,37 +11,20 @@ import kotlin.math.min
 class GameQuestionsFragment : Fragment() {
     data class Question(val text: String, val answers: List<String>)
 
-    //??? todo move to (data) class or resource
-    // The first answer is the correct one. All questions must have four answers.
-    private val questions: MutableList<Question> = mutableListOf(
-        Question(text = "What is Android Jetpack?",
-            answers = listOf("All of these", "Tools", "Documentation", "Libraries")),
-        Question(text = "What is the base class for layouts?",
-            answers = listOf("ViewGroup", "ViewSet", "ViewCollection", "ViewRoot")),
-        Question(text = "What layout do you use for complex screens?",
-            answers = listOf("ConstraintLayout", "GridLayout", "LinearLayout", "FrameLayout")),
-        Question(text = "What do you use to push structured data into a layout?",
-            answers = listOf("Data binding", "Data pushing", "Set text", "An OnClick method")),
-        Question(text = "What method do you use to inflate layouts in fragments?",
-            answers = listOf("onCreateView()", "onActivityCreated()", "onCreateLayout()", "onInflateLayout()")),
-        Question(text = "What's the build system for Android?",
-            answers = listOf("Gradle", "Graddle", "Grodle", "Groyle")),
-        Question(text = "Which class do you use to create a vector drawable?",
-            answers = listOf("VectorDrawable", "AndroidVectorDrawable", "DrawableVector", "AndroidVector")),
-        Question(text = "Which one of these is an Android navigation component?",
-            answers = listOf("NavController", "NavCentral", "NavMaster", "NavSwitcher")),
-        Question(text = "Which XML element lets you register an activity with the launcher activity?",
-            answers = listOf("intent-filter", "app-registry", "launcher-registry", "app-launcher")),
-        Question(text = "What do you use to mark a layout for data binding?",
-            answers = listOf("<layout>", "<binding>", "<data-binding>", "<dbinding>"))
-    )
-
-    private val QUESTIONS_COUNT = min((questions.size + 1) / 2, 3)
+    private val STRINGS_QUESTION_PREFIX = "gameQuestion_"
 
     private lateinit var binding: FragmentGameQuestionsBinding
-    private var questionsIndex = -1
+    private val questions: MutableList<Question> = mutableListOf()
+    private var questionsCount = 0
+    private var questionsIndex = 0
     lateinit var question: Question
     lateinit var answers: MutableList<String>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        loadQuestions()
+        setQuestion()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -49,9 +32,8 @@ class GameQuestionsFragment : Fragment() {
         setHasOptionsMenu(true)
         binding = FragmentGameQuestionsBinding.inflate(inflater, container, false)
 
-        questions.shuffle()
-        setQuestion()
-        binding.game = this
+        binding.data = this
+        updateLayout()
 
         binding.gameSubmitButton.setOnClickListener(::onClickSubmitButton)
         return binding.root
@@ -64,18 +46,31 @@ class GameQuestionsFragment : Fragment() {
         menu.findItem(R.id.gameQuestionsMenu).isVisible = false
     }
 
+    private fun loadQuestions() {
+        var idx = 0
+        while (true) {
+            idx++
+            val strId = resources.getIdentifier(STRINGS_QUESTION_PREFIX+idx, "string", context?.packageName)
+            if (strId == 0) break
+            getString(strId).split('|').let {
+                questions.add(Question(it[0], it[1].split('/')))
+            }
+        }
+        questionsCount = min((questions.size+1) / 2, 3)
+        questions.shuffle()
+    }
+
     private fun setQuestion() {
-        //??? todo restore state after Share/show Intent
-        questionsIndex++
-        (activity as AppCompatActivity).supportActionBar?.title =
-            getString(R.string.gameQuestionTitle, questionsIndex + 1, QUESTIONS_COUNT)
         question = questions[questionsIndex]
         answers  = questions[questionsIndex].answers.toMutableList()
-        binding.answer1RadioButtonGame.isChecked = PRJTST?.TEST_Game == true
-        if (PRJTST?.TEST_Game != true) {
-            binding.answersRadioGroup.clearCheck()
-            answers.shuffle()
-        }
+        if (PRJTST?.TEST_Game != true) answers.shuffle()
+    }
+
+    private fun updateLayout() {
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.gameQuestionTitle, questionsIndex + 1, questionsCount)
+        binding.answersRadioGroup.clearCheck() // android:checkedButton="@{-1}"
+        if (PRJTST?.TEST_Game == true) binding.answer1RadioButtonGame.isChecked = true
     }
 
     private fun onClickSubmitButton(view: View) {
@@ -93,13 +88,15 @@ class GameQuestionsFragment : Fragment() {
             // The first answer is the correct one.
             //view.findNavController().navigate(R.id.actionEnd_gameQuestions_to_gameTitle, bundle)
             binding.root.findNavController().navigate(GameQuestionsFragmentDirections
-                .actionEndGameQuestionsToGameTitle(QUESTIONS_COUNT, questionsIndex))
-        } else if (questionsIndex >= QUESTIONS_COUNT-1) {
+                .actionEndGameQuestionsToGameTitle(questionsCount, questionsIndex))
+        } else if (questionsIndex >= questionsCount-1) {
             //view.findNavController().navigate(R.id.actionWin_gameQuestions_to_gameTitle, bundle)
             binding.root.findNavController().navigate(GameQuestionsFragmentDirections
-                .actionWinGameQuestionsToGameTitle(QUESTIONS_COUNT, questionsIndex+1))
+                .actionWinGameQuestionsToGameTitle(questionsCount, questionsIndex+1))
         } else {
+            questionsIndex++
             setQuestion()
+            updateLayout()
             binding.invalidateAll()
         }
     }

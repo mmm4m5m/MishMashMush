@@ -68,8 +68,9 @@
     <!-- fragment_game_title.xml -->
     <string name="id_gameStartImage">-</string>
     <string name="id_gameWinImage">Android mascot celebrating</string>
-    <string name="id_gamePlayButton">Play</string>
+    <string name="id_gamePlayButton">Play!</string>
     <string name="gameQuestionImage">Android mascot wondering</string>
+    <string name="gamePlayAgain">"Again?"</string>
     <string name="gameWinShare">"I won with %1$d/%2$d correct answers!"</string>
     <string name="errStartActivity">"Error: Application not found. (%1$s)"</string>
 
@@ -83,6 +84,19 @@
     <string name="id_gameAnswer4RadioButtonGame">-</string>
     <string name="id_gameSubmitButton">Submit</string>
     <string name="gameQuestionTitle">Question %1$d of %2$d</string>
+
+    <!-- GameQuestionsFragment.kt -->
+    <!-- The first answer is the correct one. All questions must have four answers. -->
+    <string name="gameQuestion_1">What is Android Jetpack?|All of these/Tools/Documentation/Libraries</string>
+    <string name="gameQuestion_2">What is the base class for layouts?|ViewGroup/ViewSet/ViewCollection/ViewRoot</string>
+    <string name="gameQuestion_3">What layout do you use for complex screens?|ConstraintLayout/GridLayout/LinearLayout/FrameLayout</string>
+    <string name="gameQuestion_4">What do you use to push structured data into a layout?|Data binding/Data pushing/Set text/An OnClick method</string>
+    <string name="gameQuestion_5">What method do you use to inflate layouts in fragments?|onCreateView()/onActivityCreated()/onCreateLayout()/onInflateLayout()</string>
+    <string name="gameQuestion_6">What\'s the build system for Android?|Gradle/Graddle/Grodle/Groyle</string>
+    <string name="gameQuestion_7">Which class do you use to create a vector drawable?|VectorDrawable/AndroidVectorDrawable/DrawableVector/AndroidVector</string>
+    <string name="gameQuestion_8">Which one of these is an Android navigation component?|NavController/NavCentral/NavMaster/NavSwitcher</string>
+    <string name="gameQuestion_9">Which XML element lets you register an activity with the launcher activity?|intent-filter/app-registry/launcher-registry/app-launcher</string>
+    <string name="gameQuestion_10">What do you use to mark a layout for data binding?|&lt;layout>/&lt;binding>/&lt;data-binding>/&lt;dbinding></string>
 
     <!-- - -->
     <!-- ! -->

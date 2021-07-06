@@ -5,16 +5,18 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
-            name="guest_name"
-            type="String" />
+            name="data"
+            type="localhost.mmm4m5m.mishmashmush.DiceFragment" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginTop="@dimen/layout_margin"
+        android:orientation="vertical"
         tools:context=".DiceFragment">
 
         <LinearLayout
@@ -33,7 +35,7 @@
                 android:fontFamily="@font/roboto"
                 android:hint="@string/id_guestEdit"
                 android:inputType="textPersonName"
-                android:text="@{guest_name}"
+                android:text="@{data.guestName}"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_size" />
@@ -52,15 +54,15 @@
             android:id="@+id/guestText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/layout_margin"
             android:layout_marginStart="@dimen/layout_margin"
+            android:layout_marginTop="@dimen/layout_margin"
             android:layout_marginEnd="@dimen/layout_margin"
             android:layout_marginBottom="@dimen/layout_margin"
             android:background="?attr/colorAccent"
             android:fontFamily="@font/roboto"
             android:paddingTop="@dimen/text_padding"
             android:paddingBottom="@dimen/text_padding"
-            android:text='@{"Hi, "+guest_name+"!"}'
+            android:text='@{"Hi, "+data.guestName+"!"}'
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size"
@@ -73,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility='@{data.guestName == "" ? View.GONE : View.VISIBLE}'
             app:layout_constraintEnd_toStartOf="@+id/dice2_image"
             app:layout_constraintStart_toStartOf="@+id/dice2_image"
             tools:visibility="visible">
@@ -84,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto"
-                android:text="@string/id_diceText"
+                android:text='@{data.dices.isClear() ? @string/id_diceText : @string/diceFormat(data.dices.dice1, data.dices.dice2)}'
                 android:textColor="@android:color/black"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +156,8 @@
             android:backgroundTint="?attr/colorPrimaryVariant"
             android:fontFamily="@font/roboto"
             android:text="@string/id_diceWonButton"
-            android:visibility="gone"
+            android:textSize="@dimen/text_size"
+            android:visibility='@{data.dices.isLucky() ? View.VISIBLE : View.GONE}'
             tools:visibility="visible" />
     </LinearLayout>
 </layout>
