@@ -1,4 +1,4 @@
-package localhost.mmm4m5m.mishmashmush
+package com.mmm4m5m.mishmashmush
 
 import android.content.Context
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
-import localhost.mmm4m5m.mishmashmush.databinding.FragmentDiceBinding
+import com.mmm4m5m.mishmashmush.databinding.FragmentDiceBinding
 //import androidx.fragment.app.Fragment // custom Overrides
 
 class DiceFragment : Fragment() {

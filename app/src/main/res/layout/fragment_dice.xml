@@ -5,11 +5,13 @@
 
     <data>
 
+        <import type="com.mmm4m5m.mishmashmush.DiceFragment" />
+
         <import type="android.view.View" />
 
         <variable
             name="data"
-            type="localhost.mmm4m5m.mishmashmush.DiceFragment" />
+            type="DiceFragment" />
     </data>
 
     <LinearLayout

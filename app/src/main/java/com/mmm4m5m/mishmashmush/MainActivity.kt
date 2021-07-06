@@ -1,4 +1,4 @@
-package localhost.mmm4m5m.mishmashmush
+package com.mmm4m5m.mishmashmush
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
-import localhost.mmm4m5m.mishmashmush.databinding.ActivityMainBinding
+import com.mmm4m5m.mishmashmush.databinding.ActivityMainBinding
 //import androidx.appcompat.app.AppCompatActivity // custom Overrides
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.navigationView, navController)
 
-        mmmLifecycle = MMMLifecycle(this.lifecycle) //??? todo pending
+        //mmmLifecycle = MMMLifecycle(this.lifecycle) //??? todo pending
 
         binding.floatingActionButton.setOnClickListener { view ->
             //??? todo ideas for floatingActionButton

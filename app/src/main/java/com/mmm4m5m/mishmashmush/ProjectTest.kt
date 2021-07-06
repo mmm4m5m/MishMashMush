@@ -1,6 +1,6 @@
 @file:Suppress("ClassName")
 
-package localhost.mmm4m5m.mishmashmush
+package com.mmm4m5m.mishmashmush
 
 //import android.app.Activity
 import android.annotation.SuppressLint
@@ -23,7 +23,7 @@ If not used - minimum artifacts in the code
 open class ProjectTest {
     private val TOAST        = true
 
-    private val LOG          = true
+    private val LOG          = false         // TODO disable log !!!
             val USE_Timber   = false
     private val LOG_Timber   = USE_Timber && false
     private val LOG_Prefix   = "_PRJTST"
@@ -34,7 +34,7 @@ open class ProjectTest {
 
 
     /** Project specific << */
-    private val TEST         = true          // TODO disable all tests !!!
+    private val TEST         = false         // TODO disable all tests !!!
             val TEST_Old     = TEST && false // old things //??? todo remove Old - AboutActivity, menu and handlers
             val TEST_Dice    = TEST && true  // auto enter name
             val TEST_Game    = TEST && true  // do not shuffle, auto check answer
@@ -45,8 +45,6 @@ open class ProjectTest {
     private var logPerformance = false
 
     fun Toast(context: Context, msg: String) {
-        val p: Boolean
-        p = PRJTST?.LOG ?: true
         if (TOAST) Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
     }
 

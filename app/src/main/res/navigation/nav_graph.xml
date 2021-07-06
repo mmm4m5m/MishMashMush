@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/diceFragmentNav"
-        android:name="localhost.mmm4m5m.mishmashmush.DiceFragment"
+        android:name="com.mmm4m5m.mishmashmush.DiceFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_dice" />
     <fragment
         android:id="@+id/aboutFragmentNav"
-        android:name="localhost.mmm4m5m.mishmashmush.AboutFragment"
+        android:name="com.mmm4m5m.mishmashmush.AboutFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/gameTitleFragmentNav"
-        android:name="localhost.mmm4m5m.mishmashmush.GameTitleFragment"
+        android:name="com.mmm4m5m.mishmashmush.GameTitleFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_game_title">
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameQuestionsFragmentNav"
-        android:name="localhost.mmm4m5m.mishmashmush.GameQuestionsFragment"
+        android:name="com.mmm4m5m.mishmashmush.GameQuestionsFragment"
         tools:layout="@layout/fragment_game_questions">
         <action
             android:id="@+id/actionWin_gameQuestions_to_gameTitle"

@@ -1,4 +1,4 @@
-package localhost.mmm4m5m.mishmashmush
+package com.mmm4m5m.mishmashmush
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
