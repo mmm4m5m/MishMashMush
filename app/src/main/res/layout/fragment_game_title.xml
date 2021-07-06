@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameTitleFragment">
+
+    <ImageView
+        android:id="@+id/gameStartImage"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_header_height"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:contentDescription="@string/gameQuestionImage"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/gameWinImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/android_category_simple"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/gameWinImage"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_header_height"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:contentDescription="@string/id_gameWinImage"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/gamePlayButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameStartImage"
+        app:srcCompat="@drawable/you_win"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/gamePlayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:backgroundTint="?attr/colorPrimaryVariant"
+        android:paddingStart="@dimen/layout_margin"
+        android:paddingEnd="@dimen/layout_margin"
+        android:text="@string/id_gamePlayButton"
+        android:textSize="@dimen/question_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameWinImage" />
+</androidx.constraintlayout.widget.ConstraintLayout>

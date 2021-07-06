@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/gameQuestionsDrawer"
+        android:icon="@drawable/android_category_simple"
+        android:title="@string/id_gameQuestionsDrawer"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/aboutDrawer"
+        android:icon="@drawable/ic_baseline_adb_24"
+        android:title="@string/id_aboutDrawer"
+        app:showAsAction="never" />
+
+    <!-- ??? todo remove Old -->
+    <item
+        android:id="@+id/testOldDividerDrawer"
+        android:title="@string/id_testOldDividerDrawer"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/aboutActivityDrawer"
+        android:icon="@android:drawable/presence_busy"
+        android:title="@string/id_aboutActivityDrawer"
+        android:visible="false"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="localhost.mmm4m5m.mishmashmush.DiceFragment" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:orientation="vertical"
+        tools:context=".DiceFragment">
+
+        <LinearLayout
+            android:id="@+id/guestView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/guestEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_margin"
+                android:autofillHints="true"
+                android:ems="10"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/id_guestEdit"
+                android:inputType="textPersonName"
+                android:text="@{data.guestName}"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size" />
+
+            <Button
+                android:id="@+id/guestButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/layout_margin"
+                android:fontFamily="@font/roboto"
+                android:text="@string/id_guestButton" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/guestText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin"
+            android:layout_marginTop="@dimen/layout_margin"
+            android:layout_marginEnd="@dimen/layout_margin"
+            android:layout_marginBottom="@dimen/layout_margin"
+            android:background="?attr/colorAccent"
+            android:fontFamily="@font/roboto"
+            android:paddingTop="@dimen/text_padding"
+            android:paddingBottom="@dimen/text_padding"
+            android:text='@{"Hi, "+data.guestName+"!"}'
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size"
+            android:visibility="gone"
+            tools:text="@string/app_name"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/diceView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility='@{data.guestName == "" ? View.GONE : View.VISIBLE}'
+            app:layout_constraintEnd_toStartOf="@+id/dice2_image"
+            app:layout_constraintStart_toStartOf="@+id/dice2_image"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/diceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text='@{data.dices.isClear() ? @string/id_diceText : @string/diceFormat(data.dices.dice1, data.dices.dice2)}'
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/dice1Image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/id_dice1Image"
+                app:layout_constraintEnd_toStartOf="@+id/dice2Image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diceText"
+                app:srcCompat="@drawable/dice_0"
+                tools:srcCompat="@drawable/dice_1" />
+
+            <ImageView
+                android:id="@+id/dice2Image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/id_dice2Image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dice1Image"
+                app:layout_constraintTop_toBottomOf="@+id/diceText"
+                app:srcCompat="@drawable/dice_0"
+                tools:srcCompat="@drawable/dice_2" />
+
+            <Button
+                android:id="@+id/diceRollButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="?attr/colorPrimaryVariant"
+                android:text="@string/id_diceRollButton"
+                app:layout_constraintEnd_toStartOf="@+id/diceClearButton"
+                app:layout_constraintStart_toEndOf="@+id/diceCountButton"
+                app:layout_constraintTop_toTopOf="@+id/diceCountButton" />
+
+            <Button
+                android:id="@+id/diceCountButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/id_diceCountButton"
+                app:layout_constraintEnd_toStartOf="@+id/diceRollButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dice1Image" />
+
+            <Button
+                android:id="@+id/diceClearButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/id_diceClearButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/diceRollButton"
+                app:layout_constraintTop_toTopOf="@+id/diceCountButton" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/diceWonButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="?attr/colorPrimaryVariant"
+            android:fontFamily="@font/roboto"
+            android:text="@string/id_diceWonButton"
+            android:textSize="@dimen/text_size"
+            android:visibility='@{data.dices.isLucky() ? View.VISIBLE : View.GONE}'
+            tools:visibility="visible" />
+    </LinearLayout>
+</layout>
