@@ -9,7 +9,9 @@ Android Studio - first stage, act 1
 
 ![image](https://user-images.githubusercontent.com/995706/124590010-52f74f00-de63-11eb-947f-300d00bea731.png)
 
-![image](https://user-images.githubusercontent.com/995706/124590016-5559a900-de63-11eb-89a4-2e62097b30c1.png)
+![image](https://user-images.githubusercontent.com/995706/124831064-6ac5f480-df83-11eb-990d-292713556d35.png)
+
+![image](https://user-images.githubusercontent.com/995706/124831304-b6789e00-df83-11eb-894b-5ded79d7bf59.png)
 
 
 ### Game and share
