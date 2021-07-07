@@ -33,8 +33,6 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.navigationView, navController)
 
-        //mmmLifecycle = MMMLifecycle(this.lifecycle) //??? todo pending
-
         binding.floatingActionButton.setOnClickListener { view ->
             //??? todo ideas for floatingActionButton
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -107,12 +105,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        super.onResume() //??? todo pending - test
+        super.onResume()
         navController.addOnDestinationChangedListener(::onDestinationChangedListener)
     }
 
     override fun onPause() {
+        super.onPause()
         navController.removeOnDestinationChangedListener(::onDestinationChangedListener)
-        super.onPause() //??? todo pending - test
     }
 }
