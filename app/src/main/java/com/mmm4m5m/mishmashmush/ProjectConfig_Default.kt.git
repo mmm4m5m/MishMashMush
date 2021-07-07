@@ -7,8 +7,6 @@ Without Overrides (dummy middle class)
     ProjectFragment : androidx.fragment.app.Fragment
 */
 
-/** TODO enable DEFAULT !!! */
-
 val PRJTST: ProjectTest? = null
 open class AppCompatActivity : androidx.appcompat.app.AppCompatActivity() {}
 open class Fragment : androidx.fragment.app.Fragment() {}

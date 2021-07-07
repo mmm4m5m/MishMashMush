@@ -49,6 +49,7 @@
     <string name="id_diceCountButton">Cheat</string>
     <string name="id_diceClearButton">Clear</string>
     <string name="id_diceWonButton">You WON a Game!</string>
+    <string name="diceStopButton">Stop!</string>
     <string name="diceRolling">rolling...</string>
     <string name="diceCounting">cheating...</string>
     <string name="diceFormat">"%1$d x %2$d"</string>

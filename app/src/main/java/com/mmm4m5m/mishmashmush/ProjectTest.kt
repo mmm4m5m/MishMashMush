@@ -23,7 +23,7 @@ If not used - minimum artifacts in the code
 open class ProjectTest {
     private val TOAST        = true
 
-    private val LOG          = false         // TODO disable log !!!
+    private val LOG          = true
             val USE_Timber   = false
     private val LOG_Timber   = USE_Timber && false
     private val LOG_Prefix   = "_PRJTST"
@@ -34,7 +34,7 @@ open class ProjectTest {
 
 
     /** Project specific << */
-    private val TEST         = false         // TODO disable all tests !!!
+    private val TEST         = true
             val TEST_Old     = TEST && false // old things //??? todo remove Old - AboutActivity, menu and handlers
             val TEST_Dice    = TEST && true  // auto enter name
             val TEST_Game    = TEST && true  // do not shuffle, auto check answer
@@ -256,6 +256,11 @@ open class ProjectTest_AppCompatActivity : androidx.appcompat.app.AppCompatActiv
         PRJTST?.LogActivity({this})
         super.onPause()
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        PRJTST?.LogActivity({this})
+        super.onSaveInstanceState(outState)
+    }
 }
 
 
@@ -320,5 +325,10 @@ open class ProjectTest_Fragment : androidx.fragment.app.Fragment() {
     override fun onPause() {
         PRJTST?.LogFragment({this})
         super.onPause()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        PRJTST?.LogFragment({this})
+        super.onSaveInstanceState(outState)
     }
 }

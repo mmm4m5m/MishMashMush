@@ -1,6 +1,8 @@
 package com.mmm4m5m.mishmashmush
 
 import android.content.Context
+import android.media.AudioManager
+import android.media.ToneGenerator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +15,21 @@ import com.mmm4m5m.mishmashmush.databinding.FragmentDiceBinding
 //import androidx.fragment.app.Fragment // custom Overrides
 
 class DiceFragment : Fragment() {
+    private val KEY_GUEST_NAME       = "GuestName" //??? todo const
+    private val KEY_GUEST_EDIT       = "GuestEdit"
+    private val KEY_DICE1            = "Dice1"
+    private val KEY_DICE2            = "Dice2"
+    private val KEY_ROLLING          = "Rolling"
+    private val DRAWABLE_DICE_PREFIX = "dice_"
+    private val ROLLING_TURNS        = 15
+    private val ROLLING_DELAY        = (200..800)
+
     data class Dices(var dice1: Int = 0, var dice2: Int = 0) {
         fun isClear(): Boolean { return dice1 == 0 }
         fun clear() { dice1 = 0; dice2 = 0 }
         fun dice() { dice1 = (1..6).random(); dice2 = (1..6).random() }
         fun isLucky() = dice1 != 0 && dice1 == dice2
-        fun countUp(def1: Int = 6) {
+        fun count(def1: Int = 6) {
             if (isClear()) return
             if (dice2 < 6) {
                 dice2++
@@ -29,18 +40,31 @@ class DiceFragment : Fragment() {
         }
     }
 
-    private val DRAWABLE_DICE_PREFIX = "dice_"
-
+    private lateinit var mmmLifecycle: MMMLifecycle
     //private lateinit var diceRollButton: Button
     private lateinit var binding: FragmentDiceBinding
     var guestName = ""
-    val dices = Dices()
+    var guestEdit = ""
+    val dices = Dices().apply { clear() }
+    var diceRolling = 0
     private var toast: Toast? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(ourState: Bundle?) {
+        super.onCreate(ourState)
+        mmmLifecycle = MMMLifecycle(this.lifecycle).apply {
+            //??? todo move to constructor
+            onRun = ::onRolling
+            onDelay = { ROLLING_DELAY.random().toLong() }
+        }
+
         if (PRJTST?.TEST_Dice == true) guestName = getString(R.string.app_name)
-        dices.clear()
+
+        if (ourState == null) return
+        guestName   = ourState.getString(KEY_GUEST_NAME, guestName)
+        guestEdit   = ourState.getString(KEY_GUEST_EDIT, guestEdit)
+        dices.dice1 = ourState.getInt   (KEY_DICE1, dices.dice1)
+        dices.dice2 = ourState.getInt   (KEY_DICE2, dices.dice2)
+        diceRolling = ourState.getInt   (KEY_ROLLING, diceRolling)
         //??? todo restore state - guest name after restart
     }
 
@@ -49,15 +73,17 @@ class DiceFragment : Fragment() {
         //return inflater.inflate(R.layout.fragment_dice, container, false)
         binding = FragmentDiceBinding.inflate(inflater, container, false)
 
-        updateLayout()
+        binding.data = this
+        updateGuest(guestName == "" || guestEdit != "")
+        updateDices()
 
-        binding.guestButton    .setOnClickListener(::onClickGuestButton)
-        binding.guestText      .setOnClickListener(::onClickGuestText)
+        binding.guestButton    .setOnClickListener{onClickGuestButton()}
+        binding.guestText      .setOnClickListener{onClickGuestText()}
         //diceRollButton = findViewById(R.id.dice_roll_button)
-        binding.diceRollButton .setOnClickListener(::onClickDiceRollButton)
-        binding.diceCountButton.setOnClickListener(::onClickDiceCountUpButton)
-        binding.diceClearButton.setOnClickListener(::onClickDiceClearButton)
-        binding.diceWonButton  .setOnClickListener(::onClickDiceWonButton)
+        binding.diceRollButton .setOnClickListener{onClickDiceRollButton()}
+        binding.diceCountButton.setOnClickListener{onClickDiceCountButton()}
+        binding.diceClearButton.setOnClickListener{onClickDiceClearButton()}
+        binding.diceWonButton  .setOnClickListener{onClickDiceWonButton()}
         return binding.root
     }
 
@@ -67,15 +93,24 @@ class DiceFragment : Fragment() {
         //??? todo fix - show keyboard on first start
     }
 
+    override fun onPause() {
+        super.onPause()
+        toast?.cancel()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(KEY_GUEST_NAME, guestName)
+        outState.putString(KEY_GUEST_EDIT,
+            if (binding.guestEdit.isVisible) binding.guestEdit.text.toString() else "")
+        outState.putInt   (KEY_DICE1     , dices.dice1)
+        outState.putInt   (KEY_DICE2     , dices.dice2)
+        outState.putInt   (KEY_ROLLING   , diceRolling)
+    }
+
     private fun getDiceResId(idx: Int) : Int {
         if (idx in 1..6) return resources.getIdentifier(DRAWABLE_DICE_PREFIX+idx, "drawable", context?.packageName)
         return R.drawable.dice_0 // to get compile-time error when renamed
-    }
-
-    private fun updateLayout() {
-        binding.data = this
-        updateGuest(guestName == "")
-        updateDices()
     }
 
     private fun updateGuest(edit: Boolean) {
@@ -88,7 +123,7 @@ class DiceFragment : Fragment() {
     }
 
     private fun updateDices() {
-        //??? todo use data binding
+        //??? todo use data binding for image
         if (dices.dice1 == 0) {
             //binding.diceText.text = getString(R.string.id_diceText)
             val clearIsRandom = true
@@ -114,42 +149,60 @@ class DiceFragment : Fragment() {
         toast = Toast.makeText(activity, msg, Toast.LENGTH_SHORT).apply{ show() }
     }
 
-    private fun onClickGuestButton(view: View) {
-        val name = binding.guestEdit.text.toString()
-        if (name == "") return
-        guestName = name //??? todo use two-way data binding
-        binding.invalidateAll()
+    private fun onClickGuestButton() {
+        val name = binding.guestEdit.text.toString() //??? todo use two-way data binding
+        if (name != "") {
+            guestName = name
+            binding.invalidateAll()
+        }
         updateGuest(false)
         updateSoftInput()
     }
 
-    private fun onClickGuestText(view: View) {
+    private fun onClickGuestText() {
+        guestEdit = guestName
+        binding.invalidateAll()
         updateGuest(true)
         updateSoftInput()
     }
 
-    private fun onClickDiceRollButton(view: View) {
-        //??? todo rolling - disable buttons, delay, animation, sound and remove toastReShow
-        toastReShow(getString(R.string.diceRolling))
-        dices.dice()
+    private fun onRolling() {
+        if (diceRolling == 0) return
+        diceRolling--
+        if (diceRolling == 0) {
+            dices.dice()
+            toast?.cancel()
+            if (dices.isLucky()) ToneGenerator(AudioManager.STREAM_ALARM, 100).
+                startTone(ToneGenerator.TONE_CDMA_ALERT_INCALL_LITE, 500)
+            else ToneGenerator(AudioManager.STREAM_ALARM, 100).
+                startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 150)
+        } else {
+            toastReShow(getString(R.string.diceRolling))
+        }
         binding.invalidateAll()
         updateDices()
     }
 
-    private fun onClickDiceCountUpButton(view: View) {
+    private fun onClickDiceRollButton() {
+        if (diceRolling == 0) dices.clear()
+        diceRolling = if (diceRolling == 0) ROLLING_TURNS else 1
+        onRolling()
+    }
+
+    private fun onClickDiceCountButton() {
         toastReShow(getString(R.string.diceCounting))
-        dices.countUp()
+        dices.count()
         binding.invalidateAll()
         updateDices()
     }
 
-    private fun onClickDiceClearButton(view: View) {
+    private fun onClickDiceClearButton() {
         dices.clear()
         binding.invalidateAll()
         updateDices()
     }
 
-    private fun onClickDiceWonButton(view: View) {
+    private fun onClickDiceWonButton() {
         binding.root.findNavController().navigate(R.id.gameQuestionsFragmentNav)
     }
 }

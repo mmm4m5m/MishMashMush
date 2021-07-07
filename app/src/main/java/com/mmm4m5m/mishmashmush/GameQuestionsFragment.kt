@@ -9,9 +9,9 @@ import kotlin.math.min
 //import androidx.fragment.app.Fragment // custom Overrides
 
 class GameQuestionsFragment : Fragment() {
-    data class Question(val text: String, val answers: List<String>)
-
     private val STRINGS_QUESTION_PREFIX = "gameQuestion_"
+
+    data class Question(val text: String, val answers: List<String>)
 
     private lateinit var binding: FragmentGameQuestionsBinding
     private val questions: MutableList<Question> = mutableListOf()
