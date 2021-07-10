@@ -114,6 +114,7 @@
                 android:layout_marginStart="@dimen/question_horizontal_margin"
                 android:layout_marginEnd="@dimen/question_horizontal_margin"
                 android:layout_marginBottom="32dp"
+                android:onClick="@{data::onClickSubmitButton}"
                 android:text="@string/id_gameSubmitButton"
                 android:textSize="@dimen/answer_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -28,14 +28,15 @@ class GameQuestionsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        //return inflater.inflate(R.layout.fragment_game, container, false)
-        setHasOptionsMenu(true)
+        //return inflater.inflate(R.layout.fragment_game_questions, container, false) // we use view binding
         binding = FragmentGameQuestionsBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
 
         binding.data = this
         updateLayout()
 
-        binding.gameSubmitButton.setOnClickListener(::onClickSubmitButton)
+        //gameSubmitButton = findViewById(R.id.gameSubmitButton) // we use view binding
+        //binding.gameSubmitButton.setOnClickListener(::onClickSubmitButton)
         return binding.root
     }
 
@@ -73,7 +74,7 @@ class GameQuestionsFragment : Fragment() {
         if (PRJTST?.TEST_Game == true) binding.answer1RadioButtonGame.isChecked = true
     }
 
-    private fun onClickSubmitButton(view: View) {
+    fun onClickSubmitButton(view: View) {
         val answerIndex = when (binding.answersRadioGroup.checkedRadioButtonId) {
             //??? todo use two-way data binding
             R.id.answer1RadioButtonGame -> 0
@@ -87,12 +88,12 @@ class GameQuestionsFragment : Fragment() {
         if (answers[answerIndex] != questions[questionsIndex].answers[0]) {
             // The first answer is the correct one.
             //view.findNavController().navigate(R.id.actionEnd_gameQuestions_to_gameTitle, bundle)
-            binding.root.findNavController().navigate(GameQuestionsFragmentDirections.
-                actionEndGameQuestionsToGameTitle(questionsCount, questionsIndex))
+            binding.root.findNavController().navigate(GameQuestionsFragmentDirections
+                .actionEndGameQuestionsToGameTitle(questionsCount, questionsIndex))
         } else if (questionsIndex >= questionsCount-1) {
             //view.findNavController().navigate(R.id.actionWin_gameQuestions_to_gameTitle, bundle)
-            binding.root.findNavController().navigate(GameQuestionsFragmentDirections.
-                actionWinGameQuestionsToGameTitle(questionsCount, questionsIndex + 1))
+            binding.root.findNavController().navigate(GameQuestionsFragmentDirections
+                .actionWinGameQuestionsToGameTitle(questionsCount, questionsIndex + 1))
         } else {
             questionsIndex++
             setQuestion()
