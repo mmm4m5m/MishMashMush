@@ -32,17 +32,18 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.navHostFragmentMain)
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.navigationView, navController)
+        //binding.navigationView.setNavigationItemSelectedListener(::onNavigationItemSelectedListener) // used by NavController
+        navController.addOnDestinationChangedListener(::onDestinationChangedListener)
+
+        binding.navigationView.menu.findItem(R.id.aboutDrawer)        .setOnMenuItemClickListener(::onMenuItemClickListener)
+        binding.navigationView.menu.findItem(R.id.gameQuestionsDrawer).setOnMenuItemClickListener(::onMenuItemClickListener)
+        binding.navigationView.menu.findItem(R.id.aboutActivityDrawer).setOnMenuItemClickListener(::onMenuItemClickListener)
 
         binding.floatingActionButton.setOnClickListener { view ->
             //??? todo ideas for floatingActionButton
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-        binding.navigationView.menu.findItem(R.id.aboutDrawer)        .setOnMenuItemClickListener(::onMenuItemClickListener)
-        binding.navigationView.menu.findItem(R.id.gameQuestionsDrawer).setOnMenuItemClickListener(::onMenuItemClickListener)
-        binding.navigationView.menu.findItem(R.id.aboutActivityDrawer).setOnMenuItemClickListener(::onMenuItemClickListener)
-        //binding.navigationView.setNavigationItemSelectedListener(::onNavigationItemSelectedListener) // used by NavController
-        navController.addOnDestinationChangedListener(::onDestinationChangedListener)
 
         //if (PRJTST?.TEST_Old ?: false) setContentView(R.layout.activity_about)
         //if (PRJTST?.TEST_Old ?: false) startActivity(Intent(this, AboutActivity::class.java))
@@ -54,6 +55,16 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.testOldDividerMenu).isVisible = PRJTST?.TEST_Old ?: false
         menu.findItem(R.id.aboutActivityMenu) .isVisible = PRJTST?.TEST_Old ?: false
         return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navController.addOnDestinationChangedListener(::onDestinationChangedListener)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        navController.removeOnDestinationChangedListener(::onDestinationChangedListener)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -72,17 +83,6 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         //return navController.navigateUp()
         return NavigationUI.navigateUp(navController, binding.drawerLayout)
-    }
-
-    private fun onMenuItemClickListener(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.aboutDrawer         -> navController.navigate(R.id.aboutFragmentNav)
-            R.id.gameQuestionsDrawer -> navController.navigate(R.id.gameTitleFragmentNav)
-            R.id.aboutActivityDrawer -> startActivity(Intent(this, AboutActivity::class.java))
-            else -> return false
-        }
-        binding.drawerLayout.close()
-        return true
     }
 
     //private fun onNavigationItemSelectedListener(item: MenuItem): Boolean {
@@ -104,13 +104,14 @@ class MainActivity : AppCompatActivity() {
         binding.floatingActionButton.isVisible = destination.id == R.id.diceFragmentNav
     }
 
-    override fun onResume() {
-        super.onResume()
-        navController.addOnDestinationChangedListener(::onDestinationChangedListener)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        navController.removeOnDestinationChangedListener(::onDestinationChangedListener)
+    private fun onMenuItemClickListener(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.aboutDrawer         -> navController.navigate(R.id.aboutFragmentNav)
+            R.id.gameQuestionsDrawer -> navController.navigate(R.id.gameTitleFragmentNav)
+            R.id.aboutActivityDrawer -> startActivity(Intent(this, AboutActivity::class.java))
+            else -> return false
+        }
+        binding.drawerLayout.close()
+        return true
     }
 }

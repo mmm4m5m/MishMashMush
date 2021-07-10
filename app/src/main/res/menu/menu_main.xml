@@ -5,15 +5,17 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/shareActionMenu"
-        android:icon="@drawable/share"
+        android:icon="?android:attr/actionModeShareDrawable"
         android:title="@string/id_shareActionMenu"
         android:visible="false"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        tools:visible="true" />
     <item
         android:id="@+id/shareMenu"
-        android:icon="@drawable/share"
+        android:icon="?android:attr/actionModeShareDrawable"
         android:title="@string/id_shareMenu"
-        android:visible="false" />
+        android:visible="false"
+        tools:visible="true" />
     <item
         android:id="@+id/gameQuestionsMenu"
         android:icon="@drawable/android_category_simple"
